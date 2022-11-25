@@ -23,8 +23,6 @@ import static org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME;
 public class ToolbarTest {
 
     private AndroidDriver driver;
-    public static final String LOGIN = "login2";
-    public static final String PASSWORD = "password2";
 
     @BeforeAll
     public void createDriver() throws MalformedURLException {
