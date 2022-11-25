@@ -14,10 +14,11 @@ import static io.appium.java_client.remote.MobileCapabilityType.DEVICE_NAME;
 import static org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class AuthPageTest {
+public class StartScreenTest {
     private AndroidDriver driver;
     public static final String LOGIN = "login2";
     public static final String PASSWORD = "password2";
+    public static final String WRONG_PASSWORD = "wrong_password";
 
     @BeforeAll
     public void createDriver() throws MalformedURLException {
@@ -37,17 +38,47 @@ public class AuthPageTest {
     }
 
     @Test
-    public void authTest() {
+    public void authWrongDataTest() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // waiting splash screen ends
         MobileElement login = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.EditText");
         login.sendKeys(LOGIN);
         MobileElement password = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.EditText");
-        password.sendKeys(PASSWORD);
+        password.sendKeys(WRONG_PASSWORD);
         MobileElement enter = (MobileElement) driver.findElementByAccessibilityId("Сохранить");
         enter.click();
-        MobileElement el2 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.view.ViewGroup[1]/android.widget.CompoundButton");
-        el2.isDisplayed();
+        login.isDisplayed();
+    }
 
+//    @Test
+//    public void authTest() {
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // waiting splash screen ends
+//        AuthScreen authScreen = new AuthScreen(driver);
+//        authScreen.login.setValue(LOGIN);
+//        authScreen.password.setValue(PASSWORD);
+//        authScreen.saveButton.click();
+//        MobileElement el2 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.view.ViewGroup[1]/android.widget.CompoundButton");
+//        el2.isDisplayed();
+//    }
+
+
+    @Test
+    public void authTest() {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // waiting splash screen ends
+        MobileElement login = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.EditText");
+        login.sendKeys("login2");
+        MobileElement password = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.EditText");
+        password.sendKeys("password2");
+        MobileElement enter = (MobileElement) driver.findElementByAccessibilityId("Сохранить");
+        enter.click();
+        MobileElement mainScreen = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/trademark_image_view");
+        mainScreen.isDisplayed();
+    }
+
+
+    @Test
+    public void splashScreenTest() {
+        MobileElement splashText = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/splashscreen_text_view");
+        splashText.isDisplayed();
     }
 
     @AfterAll
