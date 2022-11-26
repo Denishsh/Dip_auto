@@ -1,5 +1,6 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,7 @@ public class NavigationTest {
         new StartScreenTest().auth(driver);
     }
 
+    @Description("Переход на экран О приложении")
     @Test
     public void moveToAboutTabTest() {
         MobileElement menuBtn = (MobileElement) driver.findElementByAccessibilityId("Главное меню");
@@ -51,8 +53,10 @@ public class NavigationTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // toast waiting
         MobileElement news = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.view.ViewGroup/android.widget.TextView");
         news.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Переход на экран Заявки через меню")
     @Test
     public void moveToTasksTabTest() {
         MobileElement menuBtn = (MobileElement) driver.findElementByAccessibilityId("Главное меню");
@@ -62,8 +66,10 @@ public class NavigationTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // toast waiting
         MobileElement tasks = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.LinearLayout/android.view.ViewGroup[1]/android.widget.TextView");
         tasks.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Переход на экран Новости через меню")
     @Test
     public void moveToNewsTabTest() {
         MobileElement menuBtn = (MobileElement) driver.findElementByAccessibilityId("Главное меню");
@@ -76,8 +82,10 @@ public class NavigationTest {
         }
         MobileElement news = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.LinearLayout/android.view.ViewGroup[1]/android.widget.TextView");
         news.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Переход на другой экран и возврат (главная -> О приложении -> главная)")
     @Test
     public void moveToMainTabTest() {
         MobileElement menuBtn = (MobileElement) driver.findElementByAccessibilityId("Главное меню");
@@ -87,6 +95,7 @@ public class NavigationTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // toast waiting
         MobileElement news = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.view.ViewGroup/android.widget.TextView");
         news.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
     @AfterAll

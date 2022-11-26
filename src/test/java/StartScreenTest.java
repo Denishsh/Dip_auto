@@ -1,9 +1,15 @@
 import io.appium.java_client.MobileElement;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.*;
 
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +19,7 @@ import static io.appium.java_client.remote.AndroidMobileCapabilityType.APP_PACKA
 import static io.appium.java_client.remote.MobileCapabilityType.DEVICE_NAME;
 import static org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME;
 
+@DisplayName("StartScreenTest")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class StartScreenTest {
     private AndroidDriver driver;
@@ -37,12 +44,15 @@ public class StartScreenTest {
         driver = new AndroidDriver(remoteUrl, desiredCapabilities);
     }
 
+    @Description("Отображение сплэш-скрина при открытии приложения")
     @Test
     public void splashScreenTest() {
         MobileElement splashText = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/splashscreen_text_view");
         splashText.isDisplayed();
+        allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Neg. Авторизация под неправильными данными")
     @Test
     public void authWrongDataTest() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // waiting splash screen ends
@@ -53,13 +63,16 @@ public class StartScreenTest {
         MobileElement enter = (MobileElement) driver.findElementByAccessibilityId("Сохранить");
         enter.click();
         login.isDisplayed();
+        allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Авторизация под тестовыми данными (login2, password2)")
     @Test
     public void authTest() {
         auth(driver);
         MobileElement mainScreen = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/trademark_image_view");
         mainScreen.isDisplayed();
+        allureSaveDeviceScreenshot(driver);
     }
 
     public void auth(AndroidDriver driver) {
@@ -70,7 +83,10 @@ public class StartScreenTest {
         password.sendKeys(PASSWORD);
         MobileElement enter = (MobileElement) driver.findElementByAccessibilityId("Сохранить");
         enter.click();
+    }
 
+    public void allureSaveDeviceScreenshot(AndroidDriver driver) {
+        Allure.addAttachment("screenshot", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
 
     @AfterAll

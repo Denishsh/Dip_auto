@@ -1,5 +1,6 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -42,31 +43,39 @@ public class AboutScreenTest {
         aboutTab.click();
     }
 
+    @Description("Отображение версии приложения")
     @Test
     public void versionTest() {
         MobileElement versionTitle = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/about_version_title_text_view");
         versionTitle.isDisplayed();
         MobileElement versionText = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/about_version_value_text_view");
         versionText.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Отображение копирайта, компании")
     @Test
     public void aboutCompanyTest() {
         MobileElement aboutCompanyText = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/about_company_info_label_text_view");
         aboutCompanyText.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Просмотр политики конфиденциальности")
     @Test
     public void privacyPoliticTest() {
         MobileElement privacyLink = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/about_privacy_policy_value_text_view");
         privacyLink.click();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
         driver.navigate().back();
     }
 
+    @Description("Просмотр пользовательского соглашения")
     @Test
     public void userAgreementTest() {
         MobileElement userAgreementLink = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/about_terms_of_use_value_text_view");
         userAgreementLink.click();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
         driver.navigate().back();
     }
 

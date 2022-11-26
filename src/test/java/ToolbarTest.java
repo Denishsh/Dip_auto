@@ -1,5 +1,6 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -44,13 +45,16 @@ public class ToolbarTest {
         new StartScreenTest().auth(driver);
     }
 
+    @Description("Заголовок главного экрана")
     @Test
     public void toolbarTitleTest() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         MobileElement toolbarTitle = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/trademark_image_view");
         toolbarTitle.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Кнопка наша миссия - переход на экран просмотра миссий")
     @Test
     public void toolbarMissionTest() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -58,9 +62,11 @@ public class ToolbarTest {
         ourMission.click();
         MobileElement mainMission = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/our_mission_title_text_view");
         mainMission.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
         driver.navigate().back();
     }
 
+    @Description("Открытие меню - главная, заявки, новости, о приложении")
     @Test
     public void toolbarMenuTest() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -74,9 +80,11 @@ public class ToolbarTest {
         newsTab.isDisplayed();
         MobileElement aboutTab = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[4]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView");
         aboutTab.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
         driver.navigate().back();
     }
 
+    @Description("Кнопка профиль - выход из профиля")
     @Test
     public void toolbarExitTest() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -86,6 +94,7 @@ public class ToolbarTest {
         exitConfirmBtn.click();
         MobileElement auth = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView");
         auth.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
     @AfterAll

@@ -1,5 +1,6 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -46,8 +47,10 @@ public class TasksTest {
         MobileElement emptyList = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/empty_claim_list_text_view");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         emptyList.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Фильтрация по открытым заявкам")
     @Test
     public void openFiltrationTest() {
         MobileElement filterBtn = (MobileElement) driver.findElementByAccessibilityId("Меню фильтрации списка заявок");
@@ -56,9 +59,11 @@ public class TasksTest {
         inProgressBtn.click();
         MobileElement saveBtn = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/claim_list_filter_ok_material_button");
         saveBtn.click();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
     // bug empty filter
+    @Description("neg. Фильтрация при отсустствии заданных параметров")
     @Test
     public void emptyFiltrationTest() {
         MobileElement filterBtn = (MobileElement) driver.findElementByAccessibilityId("Меню фильтрации списка заявок");
@@ -67,8 +72,10 @@ public class TasksTest {
         openBtn.click();
         MobileElement saveBtn = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/claim_list_filter_ok_material_button");
         saveBtn.click();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Фильтрация по всем параметрам")
     @Test
     public void fullFiltrationTest() {
         MobileElement filterBtn = (MobileElement) driver.findElementByAccessibilityId("Меню фильтрации списка заявок");
@@ -83,8 +90,10 @@ public class TasksTest {
         canceledFilterBtn.click();
         MobileElement saveBtn = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/claim_list_filter_ok_material_button");
         saveBtn.click();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Открытие экрана добавления заявки")
     @Test
     public void moveToAddTaskTest() {
         MobileElement addBtn = (MobileElement) driver.findElementByAccessibilityId("Кнопка добавления новой заявки");
@@ -92,8 +101,10 @@ public class TasksTest {
         MobileElement creationTitle = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/custom_app_bar_title_text_view");
         creationTitle.isDisplayed();
         driver.navigate().back();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("neg. Создание заявки с незаполненными обязательными полями")
     @Test
     public void emptyTaskCreationTest() {
         MobileElement addBtn = (MobileElement) driver.findElementByAccessibilityId("Кнопка добавления новой заявки");
@@ -105,8 +116,10 @@ public class TasksTest {
         MobileElement errBtn = (MobileElement) driver.findElementById("android:id/button1");
         errBtn.click();
         driver.navigate().back();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
+    @Description("Создание заявки. Выбор исполнителя из списка, выбор даты и времени")
     @Test
     public void addTaskTest() {
         MobileElement addBtn = (MobileElement) driver.findElementByAccessibilityId("Кнопка добавления новой заявки");
@@ -131,6 +144,7 @@ public class TasksTest {
         saveBtn.click();
         MobileElement taskTitle = (MobileElement) driver.findElementById("ru.iteco.fmhandroid:id/title_material_text_view");
         taskTitle.isDisplayed();
+        new StartScreenTest().allureSaveDeviceScreenshot(driver);
     }
 
 
